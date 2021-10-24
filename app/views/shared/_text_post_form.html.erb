@@ -1,0 +1,25 @@
+
+<div class="grey-background">
+	<h2 class="bold">Write a post</h2>
+	<%= simple_form_for :post, url: posts_path do |f| %>
+		<%=
+			f.input :title,
+			required: true,
+			autofocus: true,
+			label_html: { class: 'top-margin-1'},
+			placeholder: 'Title'
+		%>
+		<%=
+			f.input :content,
+			as: :text,
+			label_html: { class: 'top-margin-1' },
+			placeholder: 'Share something'
+		%>
+		<%=
+			f.button :submit,
+			'Post',
+			class: 'top-margin-1'
+		%>
+	<% end %>
+	<div class="top-margin-1"><%= link_to 'or share an image instead', new_posts_path(image: true), class: 'link' %></div>
+</div>

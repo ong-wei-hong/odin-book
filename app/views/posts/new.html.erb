@@ -1,0 +1,32 @@
+
+<div class="grey-background">
+	<h2 class="bold">Share an image</h2>
+	<%= simple_form_for :post, url: posts_path do |f| %>
+		<%=
+			f.input :title,
+			required: true,
+			autofocus: true,
+			label_html: { class: 'top-margin-1'},
+			placeholder: 'Title'
+		%>
+
+		<%= f.file_field :image,
+		 	direct_upload: true,
+		 	required: true,
+			accept: 'image/*',
+			class: 'top-margin-1'
+		%>
+
+		<%=
+			f.input :is_image,
+			as: :hidden,
+			input_html: { value: '1' }
+		%>
+		<%=
+			f.button :submit,
+			'Post',
+			class: 'top-margin-1'
+		%>
+	<% end %>
+	<div class="top-margin-1"><%= link_to 'or write some words instead', new_posts_path, class: 'link' %></div>
+</div>

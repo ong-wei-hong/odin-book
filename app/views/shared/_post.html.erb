@@ -1,0 +1,74 @@
+<% post_id = post.id %>
+
+<%= content_tag :a, '', id: "post_#{post_id}", class: "page-anchor" %>
+
+<div class="top-margin-1 border">
+	<p class="bold"><%= post.title %></p>
+	<% if post.content_type == 'ImageContent' %>
+		<%= cl_image_tag post.content.image.key, width: 200, height: 200, crop: :scale, class: 'image' %>
+	<% else %>
+		<p class="light-grey-background"><%= post.content.text %></p>
+	<% end %>
+	<p class="italic">~ <%= link_to post.user.name, post.user, class: 'link' %></p>
+
+	<% if post.likes.any? %>
+		<% not_first = false %>
+		<div class="inline top-margin-half">
+
+		<% l = post.likes.length %>
+		<% post.likes.find_each.with_index do |like, i| %>
+			<% if i + 1 == l %>
+				<%= link_to like.user.name, like.user, class: 'link' %>
+			<% else %>
+				<%= link_to like.user.name, like.user, class: 'link' %>,
+			<% end %>
+		<% end %>
+		liked this post
+
+
+		</div>
+	<% else %>
+		<p class="top-margin-1">This post has no likes yet</p>
+	<% end %>
+
+	<% if current_user.likes.pluck(:post_id).include?(post_id)%>
+		<button class="top-margin-half" disabled>Liked</button>
+	<% else %>
+		<%=
+			button_to 'Like',
+			likes_path(post_id: post_id),
+			data: { disable_with: 'Liked' },
+			class: 'top-margin-half'
+		%>
+	<% end %>
+
+	<% if post.comments.any?%>
+		<h3 class="underline top-margin-half">Comments</h3>
+		<div class="y-scroll">
+			<%= post.comments.find_each do |comment| %>
+				<p class="top-margin-half italic"><%= link_to comment.user.name, comment.user, class: 'link' %></p>
+				<p class="light-grey-background"><%= comment.text %> </p>
+			<% end %>
+		</div>
+	<% else %>
+		<p class="top-margin-half">This post has no comments yet</p>
+	<% end %>
+
+	<%= simple_form_for :comments, url: comments_path do |f| %>
+		<%=
+			f.input :post_id,
+			input_html: { value: post_id },
+			as: :hidden
+		%>
+		<%=
+			f.input :text,
+			label: 'Comment: ',
+			label_html: { class: 'top-margin-half' },
+			placeholder: 'Comment'
+		%>
+		<%=
+			f.button :submit, "Leave a comment",
+			data: { disable_with: 'Saving comment'}
+		%>
+	<% end %>
+</div>

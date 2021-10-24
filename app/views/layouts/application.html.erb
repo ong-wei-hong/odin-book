@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Odinbook</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+		<% if notice %>
+			<div class="flash notice">
+				<p class="flex wrapper"><%= notice %><p>
+			</div>
+		<% end %>
+
+		<% if alert %>
+			<div class="flash alert">
+				<p class="flex wrapper"><%= alert %><p>
+			</div>
+		<% end %>
+
+
+		<nav class="main-nav">
+			<div class="wrapper main-nav-wrapper">
+				<div class="left">
+					<h1 class="title bold"><%= link_to 'OdinBook', root_path %></h1>
+				</div>
+				<div class="right">
+        <% if user_signed_in? %>
+					<button><%= link_to 'Your profile', current_user %></button>
+          <button><%= link_to 'Find friends', search_path %></button>
+          <button><%= link_to 'Notifications', notifications_path %></button>
+          <button><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></button>
+        <% else %>
+          <button><%= link_to 'Log in', new_user_session_path %></button>
+          <button><%= link_to 'Sign up', new_user_registration_path %></button>
+        <% end %>
+      </div>
+			</div>
+		</nav>
+
+		<main class="main wrapper">
+    	<%= yield %>
+		</main>
+  </body>
+</html>

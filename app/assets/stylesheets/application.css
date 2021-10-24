@@ -1,0 +1,243 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* reset.css */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section,
+label, input, span {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* settings, helpers */
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+	font-family: Helvetica, sans-serif;
+}
+
+body {
+	overflow-x: auto;
+}
+
+abbr {
+  display: none
+}
+
+.wrapper {
+	min-width: 512px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+a:visited {
+	color: inherit;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+	color: inherit;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.italic{
+	font-style: italic;
+}
+
+.top-margin-1{
+	margin-top: 1em;
+}
+
+.top-margin-2 {
+	margin-top: 2em;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+.flex {
+	display: flex;
+}
+
+.top-margin-half {
+	margin-top: 0.5em;
+}
+
+.page-anchor {
+	position: relative;
+	top: -4em;
+}
+
+.light-grey-background {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+	padding: 5px;
+}
+
+.grey-background {
+	padding: 1em;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.border {
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 1em;
+}
+
+.inline > * {
+	display: inline;
+}
+
+.y-scroll {
+	max-height: 8em;
+	overflow-y: auto;
+}
+
+/* main-nav */
+
+.main-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	background-color: rgb(14, 22, 139);
+	color: #FFF;
+	padding: 1em;
+	overflow: scroll;
+}
+
+.main-nav-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title {
+	font-size: 2em;
+}
+
+/* flash */
+.flash {
+	position: absolute;
+	width: 100vw;
+	left: 0;
+	top: 4em;
+	padding: 5px 1em;
+	color: #FFF;
+}
+
+.notice {
+	background-color: rgb(12, 114, 34);
+}
+
+.alert {
+	background-color: rgb(156, 35, 35);
+}
+
+.flash-wrapper {
+	display: flex
+}
+
+/* main */
+.main {
+	padding: 1em;
+	margin-top: 5em;
+}
+
+/* sign in / sign out */
+
+.error, .error_notification {
+	color: rgb(204, 49, 49);
+	margin: 2px 0;
+}
+
+.form-actions {
+	background-color: #FFF;
+}
+
+#user_remember_me {
+	margin-top: -1px;
+}
+
+/* image */
+.image {
+	border: 2px solid #000;
+}
+
+
+/* react */
+.react-wrapper {
+	font-family: Helvetica, sans-serif
+}

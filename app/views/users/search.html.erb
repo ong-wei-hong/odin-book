@@ -1,0 +1,45 @@
+<h2 class="bold">Search</h3>
+
+<%= simple_form_for :search, url: search_path, method: 'GET' do |f| %>
+  <%= f.input :name,
+	input_html: { value: @previous_result },
+	label_html: { class: 'top-margin-1' },
+	placeholder: "Enter friend's name" %>
+
+	<div class="top-margin-1">
+  	<%= f.button :submit, 'Search', class: 'margin-top-1' %>
+	</div>
+<% end %>
+
+<% if @searched %>
+  <% if @searched_users.any? %>
+		<h3 class="top-margin-2 bold">Results</h3>
+    <% @searched_users.find_each do |user| %>
+			<div class="top-margin-1">
+      	<p><%= link_to user.name, user, class: 'link' %></p>
+				<% case User.relation_between(current_user.id, user.id) %>
+				<% when :you %>
+					<p class="italic">You</p>
+				<% when :friend %>
+					<p class="italic">Friend</p>
+				<% when :friend_request_sent %>
+					<p class="italic">Friend request sent</p>
+				<% when :friend_request_received %>
+					<%=
+						button_to 'Accept friend request',
+						friends_path(friend_request_id: FriendRequest.find_by(from_id: user.id, to: current_user.id).id),
+						data: { disable_with: 'Friend request accepted' }
+					%>
+				<% when :no_relation %>
+					<%=
+						button_to 'Send friend request',
+						friend_requests_path(to_id: user.id),
+						data: { disable_with: 'Friend request sent' }
+					%>
+				<% end %>
+			</div>
+    <% end %>
+  <% else %>
+    <p class="top-margin-2">No users found</p>
+  <% end %>
+<% end %>

@@ -1,0 +1,65 @@
+<% if @link && (notice || alert) %>
+	<%= content_tag :a, 'back to post', href: "##{@link}", class: 'link', data: { turbolinks: false } %>
+<% end %>
+
+<h2 class="bold"><%= @user_name %></h2>
+
+<% if @user.avatar.attached? %>
+  <p class="top-margin-half">Profile picture</p>
+  <%= cl_image_tag @user.avatar.key, width: 200, height: 200, crop: :scale, class: 'image' %><br />
+<% else %>
+  <p class="top-margin-half"><%= @user_name %> has no profile picture yet</p>
+<% end %>
+
+<div class="top-margin-1">
+	<% case @relation_with_current_user %>
+	<% when :you %>
+		<p>Upload a profile picture:</p>
+		<%= form_for @user do |f| %>
+			<%= f.file_field :avatar, direct_upload: true, required: true, accept: 'image/*' %>
+			<%= f.submit 'Upload profile picture' %>
+		<% end %>
+		<p class="italic top-margin-1">Your profile</p>
+	<% when :friend %>
+		<p class="italic">Friend</p>
+	<% when :friend_request_sent %>
+		<p class="italic">Friend request sent</p>
+	<% when :friend_request_received %>
+		<%=
+			button_to 'Accept friend request',
+			friends_path(friend_request_id: FriendRequest.find_by(from_id: @user_id, to: @current_user_id).id),
+			data: { disable_with: 'Friend request accepted' }
+		%>
+	<% when :no_relation %>
+		<%=
+			button_to 'Send friend request',
+			friend_requests_path(to_id:@user_id),
+			data: { disable_with: 'Friend request sent' }
+		%>
+	<% end %>
+</div>
+
+<% if @friends.any? %>
+  <h3 class="top-margin-1 bold">Friends</h3>
+	<% l = @friends.length %>
+	<div class="top-margin-half">
+		<% @friends.find_each.with_index do |friend, i| %>
+			<% if i + 1 == l %>
+				<%= link_to friend.name, friend, class: 'link'%>
+			<% else %>
+				<%= link_to friend.name, friend, class: 'link' %>,
+			<% end %>
+		<% end %>
+	</div>
+<% else %>
+  <p class="top-margin-1"><%= @user_name %> has not added any friends yet</p>
+<% end %>
+
+<% if @posts.any? %>
+	<h3 class="top-margin-1 bold">Posts</h3>
+	<% @posts.find_each do |post| %>
+		<%= render 'shared/post', post: post %>
+	<% end %>
+<% else %>
+	<p class="top-margin-1"><%= @user_name %> has not posted anything yet</p>
+<% end %>

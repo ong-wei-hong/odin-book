@@ -1,0 +1,18 @@
+<h2 class="bold">Notifications</h2>
+
+<% if @received_friend_requests.any? %>
+  <h3 class="bold top-margin-1">Friend Requests</h3>
+  <% @received_friend_requests.find_each do |request| %>
+		<div class="top-margin-1">
+		<% from = request.from %>
+    	<p><%= link_to from.name, from, class: 'link' %></p>
+			<%=
+				button_to 'Accept friend request',
+				friends_path(friend_request_id: FriendRequest.find_by(from_id: from.id, to: current_user.id).id),
+				data: { disable_with: 'Friend request accepted' }
+			%>
+		</div>
+  <% end %>
+<% else %>
+  <h3 class="top-margin-1">No new notifications</h3>
+<% end %>
