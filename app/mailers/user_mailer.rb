@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
 	def welcome_email
 		@user = params[:user]
-		@url = 'localhost:3000'
+		@url = 'https://odin-book-2.herokuapp.com/'
 		mail(to: @user.email, subject: 'Welcome to OdinBook')
 	end
 end

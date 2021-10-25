@@ -74,7 +74,7 @@ class PostsController < ApplicationController
 
 	def redirect_after_create_error(is_image)
 		if is_image
-			redirect_to 'http://localhost:3000/posts/new?image=true'
+			redirect_to 'https://odin-book-2.herokuapp.com/posts/new?image=true'
 			return
 		end
 		back_without_params
