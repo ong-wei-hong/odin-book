@@ -1,8 +1,12 @@
+require 'open-uri'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+				 :omniauthable, omniauth_providers: [:facebook]
+
 
 	validates :name, presence: true, uniqueness: true
 	validates :email, presence: true, uniqueness: true
@@ -43,5 +47,21 @@ class User < ApplicationRecord
 
   def self.friends_ids(id)
     Friend.where(friend_b_id: id).pluck(:friend_a_id) + Friend.where(friend_a_id: id).pluck(:friend_b_id)
+  end
+
+	def self.from_omniauth(auth)
+    new_user = true
+    new_user = false if User.where(provider: auth.provider, uid: auth.uid).first
+
+    user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.name = auth.info.name
+      user.password = Devise.friendly_token[0, 20]
+
+			if(auth.info.image)
+				user.avatar.attach(io: open(auth.info.image))
+			end
+    end
+    return [user, new_user]
   end
 end

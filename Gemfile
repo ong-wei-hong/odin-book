@@ -64,6 +64,7 @@ gem 'simple_form', '~> 5.1'
 # authentication
 gem 'devise', '~> 4.8'
 gem 'omniauth-facebook', '~> 8.0'
+gem 'omniauth-rails_csrf_protection'
 
 # for keys
 gem 'figaro', '~> 1.2'
@@ -73,3 +74,6 @@ gem 'cloudinary', '~> 1.21'
 
 # for mail
 gem 'sendgrid-ruby', '~> 6.5', '>= 6.5.2'
+
+# for image download through links
+gem 'open-uri', '~> 0.1.0'

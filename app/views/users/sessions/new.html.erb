@@ -21,6 +21,7 @@
   </div>
 <% end %>
 
+<%= button_to "Sign in with Facebook instead", user_facebook_omniauth_authorize_path, class: 'top-margin-1' %>
 
 <div class="top-margin-1">
 	<%= link_to 'Sign up', new_user_registration_path, class: 'link' %>

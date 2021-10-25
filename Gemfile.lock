@@ -83,6 +83,7 @@ GEM
       rest-client (>= 2.0.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
+    date (3.2.0)
     devise (4.8.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -167,6 +168,13 @@ GEM
     omniauth-oauth2 (1.7.1)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
+    omniauth-rails_csrf_protection (1.0.0)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
+    open-uri (0.1.0)
+      stringio
+      time
+      uri
     orm_adapter (0.5.0)
     pg (1.2.3)
     public_suffix (4.0.6)
@@ -253,8 +261,11 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stringio (3.0.1)
     thor (1.1.0)
     tilt (2.0.10)
+    time (0.2.0)
+      date
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -263,6 +274,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
+    uri (0.11.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -300,6 +312,8 @@ DEPENDENCIES
   letter_opener (~> 1.7)
   listen (~> 3.3)
   omniauth-facebook (~> 8.0)
+  omniauth-rails_csrf_protection
+  open-uri (~> 0.1.0)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
