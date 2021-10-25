@@ -57,10 +57,6 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.name = auth.info.name
       user.password = Devise.friendly_token[0, 20]
-
-			if(auth.info.image)
-				user.avatar.attach(io: open(auth.info.image))
-			end
     end
     return [user, new_user]
   end
