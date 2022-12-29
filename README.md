@@ -13,5 +13,5 @@ A barebones facebook clone. Users can send friend requests and accept to become 
 <p>then, go <a href="http://localhost:3000/">localhost:3000</a></p>
 
 <br />
-<p>come visit my working demo at <a href="https://odin-book-2.herokuapp.com/">https://odin-book-2.herokuapp.com/</a></p>
+
 
